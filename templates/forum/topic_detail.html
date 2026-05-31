@@ -1,0 +1,28 @@
+{% extends 'forum/base.html' %}
+{% block content %}
+    <h2>Раздел: {{ topic.title }}</h2>
+    <p class="topic-desc">{{ topic.description }}</p>
+    <hr class="steam-line">
+
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="steam-post">
+                <div class="post-meta">⚙️ {{ post.author.username }} [{{ post.created_at }}]</div>
+                <div class="post-body">{{ post.content }}</div>
+            </div>
+        {% empty %}
+            <p>Донесений пока нет. Будьте первым, кто подаст пар!</p>
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+        <form method="post" class="steam-form">
+            {% csrf_token %}
+            <textarea name="content" placeholder="Внесите свои чертежи и мысли..." required></textarea>
+            <button type="submit" class="steam-btn">Отправить по телеграфу</button>
+        </form>
+    {% else %}
+        <p class="warn">Чтобы отправить сообщение, необходимо <a href="/admin/login/">авторизоваться</a>.</p>
+    {% endif %}
+    <p><a href="{% url 'index' %}" class="back-link">← Вернуться к центральному пульту</a></p>
+{% endblock %}

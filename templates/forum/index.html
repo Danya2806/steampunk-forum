@@ -1,0 +1,15 @@
+{% extends 'forum/base.html' %}
+{% block content %}
+    <h2>Доступные отсеки обсуждений</h2>
+    <div class="topic-list">
+        {% for topic in topics %}
+            <div class="steam-card">
+                <h3><a href="{% url 'topic_detail' topic.id %}">{{ topic.title }}</a></h3>
+                <p>{{ topic.description }}</p>
+                <small>Запущено в системе: {{ topic.created_at }}</small>
+            </div>
+        {% empty %}
+            <p>В системе нет активных механизмов. Зайдите в админку и добавьте темы!</p>
+        {% endfor %}
+    </div>
+{% endblock %}

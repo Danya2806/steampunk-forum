@@ -1,0 +1,49 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+<div class="brass-frame" style="max-width: 600px; margin: 0 auto;">
+    <h2 class="section-title" style="text-align: center; margin-top: 0;"> Регистрация нового чертежа</h2>
+    <p style="text-align: center; font-style: italic;">Заполните формуляры, чтобы открыть новую ветку дискуссии в Клубе.</p>
+    
+    <hr class="brass-divider" style="border: 1px double var(--brass); margin: 20px 0;">
+
+    <form method="POST" class="telegraph-form">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px; color: var(--leather);">
+                    {{ field.label }}:
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: var(--copper); font-size: 0.9em;">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div style="text-align: center; margin-top: 25px;">
+            <button type="submit" class="copper-btn" style="padding: 12px 30px; font-size: 1.1em;">
+                 Запустить производство темы
+            </button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .telegraph-form input[type="text"], .telegraph-form textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 2px solid var(--steel);
+        background-color: rgba(255, 255, 255, 0.5);
+        font-family: inherit;
+        color: #000;
+    }
+    .telegraph-form input[type="text"]:focus, .telegraph-form textarea:focus {
+        outline: none;
+        border-color: var(--copper);
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+</style>
+{% endblock %}

@@ -1,28 +1,39 @@
 {% extends 'forum/base.html' %}
+{% load steampunk_tags %}
+
 {% block content %}
-    <h2>Раздел: {{ topic.title }}</h2>
-    <p class="topic-desc">{{ topic.description }}</p>
-    <hr class="steam-line">
+<div class="topic-head leather-banner">
+    <h2>{{ topic.title }}</h2>
+    <p>{{ topic.description }}</p>
+</div>
 
-    <div class="post-list">
-        {% for post in posts %}
-            <div class="steam-post">
-                <div class="post-meta">⚙️ {{ post.author.username }} [{{ post.created_at }}]</div>
-                <div class="post-body">{{ post.content }}</div>
-            </div>
-        {% empty %}
-            <p>Донесений пока нет. Будьте первым, кто подаст пар!</p>
-        {% endfor %}
+<div class="posts-stream">
+    {% for post in posts %}
+    <div class="post-scroll steel-rivets">
+        <div class="author-plate">
+            <strong>{{ post.author.username }}</strong>
+            <span class="rank-badge">[{{ post.author|steampunk_rank }}]</span>
+        </div>
+        <div class="post-content">
+            {{ post.content }}
+        </div>
+        <div class="post-timestamp">{{ post.created_at|date:"H:i / d.m.Y" }}</div>
     </div>
+    {% endfor %}
+</div>
 
+<hr class="brass-divider">
+
+<div class="telegraph-form">
+    <h3>Отправить ответную депешу:</h3>
     {% if user.is_authenticated %}
-        <form method="post" class="steam-form">
+        <form method="POST">
             {% csrf_token %}
-            <textarea name="content" placeholder="Внесите свои чертежи и мысли..." required></textarea>
-            <button type="submit" class="steam-btn">Отправить по телеграфу</button>
+            {{ form.as_p }}
+            <button type="submit" class="copper-btn">Ударить по клавише</button>
         </form>
     {% else %}
-        <p class="warn">Чтобы отправить сообщение, необходимо <a href="/admin/login/">авторизоваться</a>.</p>
+        <p><em>Только члены Клуба, прошедшие идентификацию, допущены к телеграфу.</em></p>
     {% endif %}
-    <p><a href="{% url 'index' %}" class="back-link">← Вернуться к центральному пульту</a></p>
+</div>
 {% endblock %}

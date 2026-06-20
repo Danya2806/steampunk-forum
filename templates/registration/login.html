@@ -1,0 +1,14 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+<div class="brass-frame" style="max-width: 400px; margin: 0 auto;">
+    <h2 style="text-align: center;">Идентификация</h2>
+    <p>Предъявите ваш пропуск, чтобы получить доступ к телеграфу.</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="copper-btn" style="width: 100%;">Повернуть вентиль (Войти)</button>
+    </form>
+</div>
+{% endblock %}

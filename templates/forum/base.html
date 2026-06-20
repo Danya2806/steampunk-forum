@@ -3,22 +3,52 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Паровой Узел Связи{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аэродром Идей | Викторианский Форум</title>
+    <link rel="stylesheet" href="{% static 'css/steampunk.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="steam-header">
-        <h1>⚙️ ИНФОРМАЦИОННЫЙ ПРОВОДНИК ФОРУМА ⚙️</h1>
-        <div class="user-panel">
-            {% if user.is_authenticated %}
-                Изобретатель: <strong>{{ user.username }}</strong> | <a href="/admin/logout/">Загасить котел (Выйти)</a>
-            {% else %}
-                <a href="/admin/login/">Разжечь котел (Войти)</a>
-            {% endif %}
-        </div>
-    </header>
-    <main class="container">
-        {% block content %}{% endblock %}
-    </main>
+    <div class="steam-wrapper">
+        <header class="brass-header">
+            <div class="gear gear-left">⚙️</div>
+            <div class="header-titles">
+                <h1>КЛУБЪ ПАРОВЫХЪ МЕХАНИКОВЪ</h1>
+                <small>Основанъ в 1889 г. / Эдиция цифровая</small>
+            </div>
+            <div class="gear gear-right">⚙️</div>
+        </header>
+
+        <nav class="rivet-nav">
+            <div style="display: flex; gap: 20px;">
+                <a href="{% url 'topic_list' %}">Главный Манометр</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'create_topic' %}">+ Опубликовать чертеж</a>
+                {% endif %}
+            </div>
+
+            <div style="margin-left: auto; display: flex; gap: 15px; align-items: center;">
+                {% if user.is_authenticated %}
+                    <span style="color: var(--brass-glow); font-weight: bold; padding: 6px;">
+                        Инженер: {{ user.username }}
+                    </span>
+                    <form method="post" action="{% url 'logout' %}" style="display: inline; margin: 0;">
+                        {% csrf_token %}
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: var(--copper); font-family: inherit; font-weight: bold; text-decoration: underline; font-size: 1em;">
+                            Покинуть цех
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Предъявить пропуск (Вход)</a>
+                    <a href="{% url 'register' %}" style="border-color: var(--copper);">Получить допуск (Регистрация)</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <main class="parchment-paper">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
 </body>
 </html>

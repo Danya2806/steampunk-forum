@@ -1,7 +1,7 @@
-/* Общие настройки в викторианском индустриальном стиле */
+
 body {
-    background-color: #2b2622; /* Цвет темного дерева / угля */
-    color: #e5d3b3; /* Состаренная бумага */
+    background-color: #2b2622;
+    color: #e5d3b3;
     font-family: 'Georgia', 'Courier New', serif;
     margin: 0;
     padding: 0;
@@ -16,24 +16,24 @@ body {
 /* Шапка-панель */
 .steam-header {
     background-color: #1c1816;
-    border-bottom: 4px double #b87333; /* Медный кант */
+    border-bottom: 4px double #b87333;
     padding: 20px;
     text-align: center;
     box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 
 .steam-header h1 {
-    color: #cd7f32; /* Латунь */
+    color: #cd7f32;
     margin: 0 0 10px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .user-panel a, .back-link, .warn a {
-    color: #ffbf00; /* Янтарный свет вакуумных ламп */
+    color: #ffbf00;
     text-decoration: none;
 }
 
-/* Карточки и элементы интерфейса */
+
 .steam-card, .steam-post {
     background-color: #3a312c;
     border: 2px solid #b87333; /* Медная рамка */
@@ -64,7 +64,7 @@ body {
     margin: 20px 0;
 }
 
-/* Стилизация форм обратной связи */
+
 .steam-form textarea {
     width: 100%;
     height: 100px;

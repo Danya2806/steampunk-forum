@@ -1,0 +1,18 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+<h2 class="section-title">Актуальные изыскания:</h2>
+
+<div class="topics-grid">
+    {% for topic in topics %}
+    <div class="topic-card brass-frame">
+        <h3><a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a></h3>
+        <p class="topic-desc">{{ topic.description|truncatewords:20 }}</p>
+        <div class="topic-meta">
+            <span>Запущено: {{ topic.created_at|date:"d.m.Y" }}</span>
+            <span>Телеграмм: {{ topic.posts.count }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
